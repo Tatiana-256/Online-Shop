@@ -20,10 +20,6 @@ const CollectionItem = ({ item, addItem }) => {
   );
 };
 
-// const mapStateToProps = ({ item }) => ({
-//   cartItems: item
-// });
-
 const mapDispatchToProps = dispatch => ({
   addItem: item => dispatch(addItem(item))
 });
