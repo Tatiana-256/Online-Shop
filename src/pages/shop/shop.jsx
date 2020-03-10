@@ -1,7 +1,6 @@
 import React from "react";
 import CollectionsOverview from "../../components/collections-overview/collections-overview.jsx";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
 import CollectionPage from "../collection/collection.jsx";
 
 const ShopPage = ({ match }) => {
