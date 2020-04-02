@@ -50,8 +50,8 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
   return await batch.commit();
 };
 
-export const convertCollectionsSnapshotToMap = collection => {
-  const transformCollection = collection.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
 
     return {
@@ -61,8 +61,8 @@ export const convertCollectionsSnapshotToMap = collection => {
       items
     };
   });
-  transformCollection.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()];
+  return transformCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});
 };

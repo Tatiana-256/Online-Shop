@@ -2,7 +2,11 @@ import React from "react";
 import CollectionsOverview from "../../components/collections-overview/collections-overview.jsx";
 import { Route } from "react-router-dom";
 import CollectionPage from "../collection/collection.jsx";
-import { firestore, convertCollectionsSnapshotToMap } from "firebase";
+import {} from "firebase";
+import {
+  firestore,
+  convertCollectionsSnapshotToMap
+} from "../../firebase/firebase";
 import { connect } from "react-redux";
 import { updateCollections } from "../../redux/shop/shop.action.js";
 
@@ -13,7 +17,7 @@ class ShopPage extends React.Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection("collections");
 
-    collectionRef.onSnapshot(async snapshot => {
+    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
     });
