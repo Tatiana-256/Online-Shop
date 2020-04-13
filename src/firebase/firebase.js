@@ -10,7 +10,7 @@ const config = {
   storageBucket: "online-shop-ef95b.appspot.com",
   messagingSenderId: "861561148718",
   appId: "1:861561148718:web:3584d7cb15db8fc87bd6bf",
-  measurementId: "G-5CYC3CD65E"
+  measurementId: "G-5CYC3CD65E",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -27,7 +27,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -43,22 +43,22 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
   console.log(collectionRef);
 
   const batch = firestore.batch();
-  objectToAdd.forEach(obj => {
+  objectToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
   return await batch.commit();
 };
 
-export const convertCollectionsSnapshotToMap = collections => {
-  const transformCollection = collections.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformCollection = collections.docs.map((doc) => {
     const { title, items } = doc.data();
 
     return {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
-      items
+      items,
     };
   });
   return transformCollection.reduce((accumulator, collection) => {
@@ -70,9 +70,9 @@ export const convertCollectionsSnapshotToMap = collections => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;

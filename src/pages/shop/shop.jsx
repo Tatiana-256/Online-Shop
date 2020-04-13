@@ -2,20 +2,17 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-// import { fetchCollectionStartAsync } from "../../redux/shop/shop.action.js";
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container.jsx";
 import CollectionsContainer from "../collection/collection.container.jsx";
 import { fetchCollectionsStart } from "../../redux/shop/shop.sagas.js";
 
 class ShopPage extends React.Component {
   componentDidMount() {
-    const { fetchCollectionsStart } = this.props;
-    fetchCollectionsStart();
+    // const { fetchCollectionsStart } = this.props;
+    this.props.fetchCollectionsStart();
   }
-
   render() {
     const { match } = this.props;
-
     return (
       <div className="shop-page">
         <Route

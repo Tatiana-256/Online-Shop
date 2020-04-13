@@ -8,7 +8,7 @@ import SignInSignUpPage from "./pages/signIn-signUp/signIn-signUp";
 import {
   auth,
   createUserProfileDocument,
-  addCollectionAndDocuments
+  addCollectionAndDocuments,
 } from "./firebase/firebase.js";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
@@ -23,14 +23,14 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser, collectionsArray } = this.props;
 
-    this.unSubscriberFromAuth = auth.onAuthStateChanged(async userAuth => {
+    this.unSubscriberFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapShot => {
+        userRef.onSnapshot((snapShot) => {
           setCurrentUser({
             id: snapShot.id,
-            ...snapShot.data()
+            ...snapShot.data(),
           });
 
           console.log(this.state);
@@ -75,11 +75,11 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  collectionsArray: selectCollectionsForPreview
+  collectionsArray: selectCollectionsForPreview,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

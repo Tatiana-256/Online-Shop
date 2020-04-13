@@ -1,13 +1,16 @@
 const INITIAL_STATE = {
-  currentUser: null
+  currentUser: null,
+  error: null,
 };
-const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SET_CURRENT_USER:
-      return { ...state, currentUser: action.payload };
-
+    case "GOOGLE_SIGH_IN_SUCCESS":
+    case "MAIL_SIGH_IN_SUCCESS":
+      return { ...state, currentUser: action.payload, error: null };
+    case "GOOGLE_SIGH_IN_FAILURE":
+    case "MAIL_SIGH_IN_FAILURE":
+      return { ...state, error: action.payload };
     default:
       return state;
   }
