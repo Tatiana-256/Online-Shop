@@ -20,3 +20,16 @@ export const singInFailure = (error) => ({
 export const checkUserSession = () => ({
   type: "CHECK_USER_SESSION",
 });
+
+export const singOutStart = () => ({
+  type: "SIGH_OUT_START",
+});
+
+export const singOutSuccess = () => ({
+  type: "SIGH_OUT_SUCCESS",
+});
+
+export const singOutFailure = (error) => ({
+  type: "SIGH_OUT_FAILURE",
+  payload: error,
+});
