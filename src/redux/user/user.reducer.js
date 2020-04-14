@@ -5,11 +5,9 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "GOOGLE_SIGH_IN_SUCCESS":
-    case "MAIL_SIGH_IN_SUCCESS":
+    case "SIGH_IN_SUCCESS":
       return { ...state, currentUser: action.payload, error: null };
-    case "GOOGLE_SIGH_IN_FAILURE":
-    case "MAIL_SIGH_IN_FAILURE":
+    case "SIGH_IN_FAILURE":
       return { ...state, error: action.payload };
     default:
       return state;
