@@ -9,6 +9,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return { ...state, currentUser: action.payload, error: null };
     case "SIGH_IN_FAILURE":
       return { ...state, error: action.payload };
+    case "CHECK_USER_SESSION":
+      return { ...state };
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import { userSagas } from "../redux/user/user.sagas";
 
 const config = {
   apiKey: "AIzaSyD-BjMmazo_ZjUl5UqWgOuK9Or1yROST9o",
@@ -65,6 +66,15 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unSubscribe = auth.onAuthStateChanged((userAuth) => {
+      unSubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
 
 export const auth = firebase.auth();
