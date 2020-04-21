@@ -33,3 +33,18 @@ export const singOutFailure = (error) => ({
   type: "SIGH_OUT_FAILURE",
   payload: error,
 });
+
+export const singUpStart = (userCredentials) => ({
+  type: "SIGH_UP_START",
+  payload: userCredentials,
+});
+
+export const singUpSuccess = ({ user, additionalData }) => ({
+  type: "SIGH_UP_SUCCESS",
+  payload: { user, additionalData },
+});
+
+export const singUpFailure = (error) => ({
+  type: "SIGH_UP_FAILURE",
+  payload: error,
+});

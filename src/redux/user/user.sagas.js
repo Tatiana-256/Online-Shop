@@ -11,11 +11,18 @@ import {
   singInFailure,
   singOutSuccess,
   singOutFailure,
+  singUpSuccess,
+  singUpFailure,
 } from "./user.actions";
+import { useReducer } from "react";
 
-export function* getSnapshotFromUserAuth(userAuth) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userRef = yield call(
+      createUserProfileDocument,
+      userAuth,
+      additionalData
+    );
     const userSnapshot = yield userRef.get();
     yield put(singInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
@@ -59,6 +66,22 @@ export function* singOut() {
     yield put(singOutFailure(error));
   }
 }
+
+export function* singUp({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(singUpSuccess({ user, additionalData: { displayName } }));
+  } catch (error) {
+    yield put(singUpFailure(error));
+  }
+}
+
+export function* singInAfterSingUp({ payload: { user, additionalData } }) {
+  yield getSnapshotFromUserAuth(user, additionalData);
+}
+
+// _______SAGAS WITH START ACTIONS_________________
+
 export function* onGoogleSignInStart() {
   yield takeLatest("GOOGLE_SIGH_IN_START", singInWithGoogle);
 }
@@ -74,11 +97,22 @@ export function* onUserSignOutStart() {
   yield takeLatest("SIGH_OUT_START", singOut);
 }
 
+export function* onUserSignUpStart() {
+  yield takeLatest("SIGH_UP_START", singUp);
+}
+
+export function* onUserSignUpSuccess() {
+  yield takeLatest("SIGH_UP_SUCCESS", singInAfterSingUp);
+}
+// ______Combine sagas______________
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onCheckUserSession),
     call(onUserSignOutStart),
+    call(onUserSignUpStart),
+    call(onUserSignUpSuccess),
   ]);
 }

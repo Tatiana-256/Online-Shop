@@ -11,6 +11,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return { ...state, currentUser: null, error: null };
     case "SIGH_IN_FAILURE":
     case "SIGH_OUT_FAILURE":
+    case "SIGH_UP_FAILURE":
       return { ...state, error: action.payload };
     default:
       return state;

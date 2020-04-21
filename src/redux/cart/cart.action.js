@@ -1,18 +1,22 @@
 export const toggleCartHidden = () => ({
-  type: "TOGGLE_CART_HIDDEN"
+  type: "TOGGLE_CART_HIDDEN",
 });
 
-export const addItem = item => ({
+export const addItem = (item) => ({
   type: "ADD_ITEM",
-  payload: item
+  payload: item,
 });
 
-export const clearItemFromCart = item => ({
+export const clearItemFromCart = (item) => ({
   type: "CLEAR_ITEM_FROM_CART",
-  payload: item
+  payload: item,
 });
 
-export const removeItemFromCart = item => ({
+export const removeItemFromCart = (item) => ({
   type: "REMOVE_ITEM",
-  payload: item
+  payload: item,
+});
+
+export const clearCart = () => ({
+  type: "CLEAR_CART",
 });

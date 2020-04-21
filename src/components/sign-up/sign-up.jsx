@@ -3,6 +3,8 @@ import "./sign-up.scss";
 import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
 import { auth, createUserProfileDocument } from "../../firebase/firebase.js";
+import { connect } from "react-redux";
+import { singUpStart } from "../../redux/user/user.actions";
 
 class SignUp extends React.Component {
   constructor() {
@@ -11,12 +13,13 @@ class SignUp extends React.Component {
       displayName: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
     };
   }
 
-  handelSubmit = async event => {
+  handelSubmit = async (event) => {
     event.preventDefault();
+    const { singUpStart } = this.props;
     const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
@@ -24,24 +27,26 @@ class SignUp extends React.Component {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      this.setState = {
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      };
-    } catch (error) {
-      console.error(error);
-    }
+    singUpStart({ displayName, email, password });
+    // try {
+    //   const { user } = await auth.createUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
+    //   await createUserProfileDocument(user, { displayName });
+
+    //   this.setState = {
+    //     displayName: "",
+    //     email: "",
+    //     password: "",
+    //     confirmPassword: ""
+    //   };
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { value, name } = event.target;
 
     this.setState({ [name]: value });
@@ -92,4 +97,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  singUpStart: (userCredentials) => dispatch(singUpStart(userCredentials)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);
