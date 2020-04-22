@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { userSagas } from "../redux/user/user.sagas";
 
 const config = {
   apiKey: "AIzaSyD-BjMmazo_ZjUl5UqWgOuK9Or1yROST9o",

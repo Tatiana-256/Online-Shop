@@ -14,7 +14,6 @@ import {
   singUpSuccess,
   singUpFailure,
 } from "./user.actions";
-import { useReducer } from "react";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {

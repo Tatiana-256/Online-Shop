@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import "./header.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
-import { auth } from "../../firebase/firebase.js";
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
 import { selectCurrentUser } from "../../redux/user/user.selector";

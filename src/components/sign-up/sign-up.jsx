@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import "./sign-up.scss";
 import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.js";
 import { singUpStart } from "../../redux/user/user.actions";
 
 const SignUp = ({ singUpStart }) => {
