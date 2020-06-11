@@ -33,7 +33,7 @@
     }
   }
   .collection-footer {
-    width: 100%;
+    width: 80%;
     height: 5%;
     display: flex;
     justify-content: space-between;
@@ -49,3 +49,21 @@
     }
   }
 }
+
+
+
+@media screen and (max-width: 880px) {
+  .collection-item .collection-footer {
+    font-size: 14px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .collection-item .collection-footer {
+    font-size: 10px;
+  }
+}
+
+
+
