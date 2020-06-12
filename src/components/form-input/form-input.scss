@@ -52,3 +52,14 @@ $main-color: black;
     }
   }
 }
+
+
+
+@media screen and (max-width: 690px) {
+  .group {
+    margin: 0px;
+  }
+
+  .form-input{
+    padding: 0px 10px 12px 10px}
+}

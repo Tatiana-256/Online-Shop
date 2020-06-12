@@ -9,14 +9,20 @@
 
   .buttons {
     display: flex;
-    justify-content: space-between;
   }
 }
 
 
 @media screen and (max-width: 940px) {
 
-  .sign-in{
+  .sign-in {
     width: 260px;
   }
+}
+
+@media screen and (max-width: 690px) {
+  .sign-in {
+    margin-bottom: 20px;
+  }
+
 }
